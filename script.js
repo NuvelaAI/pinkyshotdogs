@@ -84,8 +84,7 @@ form.addEventListener("submit", async (e) => {
     });
     if (!res.ok) throw new Error();
     form.reset();
-    status.classList.add("ok");
-    status.textContent = "Thanks! We got your request and will be in touch soon.";
+    showThanks();
   } catch {
     status.classList.add("err");
     status.textContent = `Something went wrong. Please call, text, or email ${BOOKING_EMAIL}.`;
@@ -98,3 +97,17 @@ form.addEventListener("submit", async (e) => {
 form.querySelectorAll("input, select, textarea").forEach((el) =>
   el.addEventListener("input", () => el.classList.remove("invalid"))
 );
+
+// Thank-you popup
+const thanks = document.getElementById("thanks-dialog");
+function showThanks() {
+  if (typeof thanks.showModal === "function") {
+    thanks.showModal();
+    document.getElementById("thanks-close").focus();
+  } else {
+    status.classList.add("ok");
+    status.textContent = "Thanks! We got your request and will be in touch soon.";
+  }
+}
+document.getElementById("thanks-close").addEventListener("click", () => thanks.close());
+thanks.addEventListener("click", (e) => { if (e.target === thanks) thanks.close(); });
