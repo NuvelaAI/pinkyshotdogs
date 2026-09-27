@@ -167,7 +167,9 @@ h1, h2, h3 { font-family: "Lilita One", "Nunito", sans-serif; font-weight: 400; 
 @media (max-width: 760px) { .two-col { grid-template-columns: 1fr; gap: 28px; text-align: center; } .social-row { justify-content: center; } .area-list { justify-content: center; } }
 
 /* Events */
-.event-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 18px; }
+.event-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; max-width: 960px; margin-inline: auto; }
+@media (max-width: 860px) { .event-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 520px) { .event-grid { grid-template-columns: 1fr; } }
 .event { background: #fff; border-radius: var(--radius); padding: 24px; text-align: center; box-shadow: var(--shadow); }
 .event-ico { font-size: 2.2rem; display: block; margin-bottom: 6px; }
 .event h3 { font-size: 1.35rem; color: var(--pink); margin-bottom: 4px; }
