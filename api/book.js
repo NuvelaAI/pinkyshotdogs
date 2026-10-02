@@ -55,7 +55,7 @@ module.exports = async (req, res) => {
   // so check the certificate against that name instead of the netsolmail.net alias.
   const tlsName =
     process.env.SMTP_TLS_SERVERNAME ||
-    (/\.netsolmail\.net\.?$/i.test(SMTP_HOST) ? "smtp.hostingplatform.com" : undefined);
+    (/\.(netsolmail\.net|oxcs\.net)\.?$/i.test(SMTP_HOST) ? "smtp.hostingplatform.com" : undefined);
 
   const rows = Object.entries(FIELDS).filter(([k]) => data[k]);
   const text = rows.map(([k, label]) => `${label}: ${data[k]}`).join("\n");
