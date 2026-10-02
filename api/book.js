@@ -67,25 +67,42 @@ module.exports = async (req, res) => {
       `<td style="padding:6px 0;white-space:pre-wrap">${esc(data[k])}</td></tr>`).join("") +
     `</table><p style="font-family:sans-serif;color:#666">Reply to this email to answer ${esc(data.name)} directly.</p>`;
 
-  try {
-    const transporter = nodemailer.createTransport({
-      host: SMTP_HOST,
+  const user = SMTP_USER.trim();
+  const pass = SMTP_PASS.replace(/^\s+|\s+$/g, "");
+  const makeTransport = (authMethod) =>
+    nodemailer.createTransport({
+      host: SMTP_HOST.trim(),
       port,
       secure: port === 465,
-      auth: { user: SMTP_USER, pass: SMTP_PASS },
+      auth: { user, pass },
+      ...(authMethod ? { authMethod } : {}),
       ...(tlsName ? { tls: { servername: tlsName } } : {}),
     });
-    await transporter.sendMail({
-      from: `"Pinky's Website" <${SMTP_USER}>`,
-      to: MAIL_TO || SMTP_USER,
+  const mail = {
+      from: `"Pinky's Website" <${user}>`,
+      to: MAIL_TO || user,
       replyTo: `"${data.name.replace(/"/g, "")}" <${data.email}>`,
       subject: `Booking request: ${data.event_type} on ${data.event_date}`,
       text,
       html,
-    });
+  };
+
+  try {
+    try {
+      await makeTransport().sendMail(mail);
+    } catch (err) {
+      // Some mail servers only accept the older LOGIN sign-in method.
+      if (err && err.responseCode === 535) await makeTransport("LOGIN").sendMail(mail);
+      else throw err;
+    }
     return res.status(200).json({ ok: true });
   } catch (err) {
-    console.error("Booking form send failed:", err && err.message);
+    // Safe diagnostics only: never log the password itself.
+    console.error(
+      "Booking form send failed:", err && err.message,
+      `| host=${SMTP_HOST.trim()} port=${port} user=${user}` +
+      ` passLength=${pass.length} passHadExtraSpaces=${pass.length !== SMTP_PASS.length}`
+    );
     return res.status(502).json({ ok: false, error: "Could not send" });
   }
 };
