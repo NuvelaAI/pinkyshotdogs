@@ -2,6 +2,7 @@
 // Settings live in Vercel > Project > Settings > Environment Variables:
 //   SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASS  (from the email provider)
 //   MAIL_TO (optional, defaults to SMTP_USER)
+//   SMTP_TLS_SERVERNAME (optional, name to check the server's certificate against)
 const nodemailer = require("nodemailer");
 
 const FIELDS = {
@@ -50,6 +51,11 @@ module.exports = async (req, res) => {
     return res.status(500).json({ ok: false, error: "Email is not set up yet" });
   }
   const port = Number(SMTP_PORT) || 587;
+  // Network Solutions / Domain.com mail servers use a *.hostingplatform.com certificate,
+  // so check the certificate against that name instead of the netsolmail.net alias.
+  const tlsName =
+    process.env.SMTP_TLS_SERVERNAME ||
+    (/\.netsolmail\.net\.?$/i.test(SMTP_HOST) ? "smtp.hostingplatform.com" : undefined);
 
   const rows = Object.entries(FIELDS).filter(([k]) => data[k]);
   const text = rows.map(([k, label]) => `${label}: ${data[k]}`).join("\n");
@@ -67,6 +73,7 @@ module.exports = async (req, res) => {
       port,
       secure: port === 465,
       auth: { user: SMTP_USER, pass: SMTP_PASS },
+      ...(tlsName ? { tls: { servername: tlsName } } : {}),
     });
     await transporter.sendMail({
       from: `"Pinky's Website" <${SMTP_USER}>`,
