@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://www.pinkysdogs.com/sitemap.xml
+Sitemap: https://www.pinkyshotdogsllc.com/sitemap.xml

@@ -2,7 +2,7 @@
 // Paste the Formspree endpoint here once the form is created (e.g. "https://formspree.io/f/abcdwxyz").
 // Until then, the form opens the visitor's email app with the details filled in.
 const FORM_ENDPOINT = "https://formspree.io/f/xbglppnz";
-const BOOKING_EMAIL = "book@pinkysdogs.com";
+const BOOKING_EMAIL = "eat@pinkyshotdogsllc.com";
 // ====================
 
 document.getElementById("year").textContent = new Date().getFullYear();
