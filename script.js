@@ -1,7 +1,6 @@
 // ===== SETTINGS =====
-// Paste the Formspree endpoint here once the form is created (e.g. "https://formspree.io/f/abcdwxyz").
-// Until then, the form opens the visitor's email app with the details filled in.
-const FORM_ENDPOINT = "https://formspree.io/f/xbglppnz";
+// Booking requests go to the site's own email sender (api/book.js).
+const FORM_ENDPOINT = "/api/book";
 const BOOKING_EMAIL = "eat@pinkyshotdogsllc.com";
 // ====================
 
@@ -79,7 +78,7 @@ form.addEventListener("submit", async (e) => {
   try {
     const res = await fetch(FORM_ENDPOINT, {
       method: "POST",
-      body: data,
+      body: new URLSearchParams(data),
       headers: { Accept: "application/json" },
     });
     if (!res.ok) throw new Error();
@@ -87,7 +86,7 @@ form.addEventListener("submit", async (e) => {
     showThanks();
   } catch {
     status.classList.add("err");
-    status.textContent = `Something went wrong. Please call, text, or email ${BOOKING_EMAIL}.`;
+    status.textContent = `Your request didn't go through. Please try again, or call or text (631) 327-0050.`;
   } finally {
     btn.disabled = false;
     btn.textContent = "Send Booking Request";
