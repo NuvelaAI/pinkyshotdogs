@@ -270,6 +270,7 @@ h1, h2, h3 { font-family: "Lilita One", "Nunito", sans-serif; font-weight: 400; 
 @media (prefers-reduced-motion: reduce) { .thanks[open] { animation: none; } }
 
 /* Footer */
+.footer-link { color: #fff; font-weight: 800; }
 .footer { background: var(--ink); color: #f3dbe4; text-align: center; padding: 40px 16px; }
 .footer img { width: 90px; margin: 0 auto 10px; }
 .footer p { margin: 4px 0; }
