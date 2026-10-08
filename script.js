@@ -110,3 +110,11 @@ function showThanks() {
 }
 document.getElementById("thanks-close").addEventListener("click", () => thanks.close());
 thanks.addEventListener("click", (e) => { if (e.target === thanks) thanks.close(); });
+
+// "Ask About a Fundraiser" pre-selects the event type in the booking form
+document.querySelectorAll("[data-event-type]").forEach((a) =>
+  a.addEventListener("click", () => {
+    const sel = document.querySelector('select[name="event_type"]');
+    if (sel) sel.value = a.dataset.eventType;
+  })
+);
