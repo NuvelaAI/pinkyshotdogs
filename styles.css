@@ -135,8 +135,9 @@ h1, h2, h3 { font-family: "Lilita One", "Nunito", sans-serif; font-weight: 400; 
 @media (max-width: 760px) { .section { padding: 56px 0; } .section-title.left { text-align: center; } }
 
 /* Menu */
-.menu-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 20px; }
-.menu-grid-2 { grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); max-width: 760px; margin-inline: auto; }
+.menu-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+@media (max-width: 900px) { .menu-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 560px) { .menu-grid { grid-template-columns: 1fr; } }
 .menu-card {
   background: #fff; border-radius: var(--radius); padding: 22px 22px 18px;
   border: 3px solid var(--pink-soft); box-shadow: var(--shadow);
@@ -147,6 +148,27 @@ h1, h2, h3 { font-family: "Lilita One", "Nunito", sans-serif; font-weight: 400; 
 .menu-top h3 { font-size: 1.5rem; color: var(--ink); margin: 0 0 8px; }
 .price { font-family: "Lilita One", sans-serif; font-size: 1.4rem; color: var(--pink); white-space: nowrap; }
 .menu-card p { margin: 0; color: var(--muted); }
+.toppings {
+  margin-top: 36px; background: var(--teal-dark); color: #fff; border-radius: var(--radius);
+  padding: 26px 28px; display: grid; grid-template-columns: 1fr 2fr; gap: 24px; align-items: center;
+}
+.toppings h3 { font-size: 2rem; margin: 0 0 4px; }
+.toppings h3 span { color: var(--sun); }
+.toppings-head p { margin: 0; font-weight: 600; opacity: .9; }
+.topping-list { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+.topping-list li { background: rgba(255,255,255,.16); padding: 6px 14px; border-radius: 999px; font-weight: 700; font-size: .95rem; }
+@media (max-width: 760px) { .toppings { grid-template-columns: 1fr; text-align: center; } .topping-list { justify-content: center; } }
+
+.extras { margin-top: 24px; display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.extra-card { background: #fff; border-radius: var(--radius); padding: 22px 24px; border: 3px solid var(--pink-soft); box-shadow: var(--shadow); }
+.extra-card h3 { font-size: 1.5rem; color: var(--pink); margin: 0; }
+.extra-sub { margin: 0 0 12px; text-transform: uppercase; letter-spacing: 1.5px; font-size: .78rem; font-weight: 800; color: var(--teal-dark); }
+.price-list { list-style: none; margin: 0; padding: 0; }
+.price-list li { display: flex; justify-content: space-between; gap: 12px; padding: 8px 0; border-bottom: 2px dashed var(--pink-soft); font-weight: 700; }
+.price-list li:last-child { border-bottom: 0; }
+.price-sm { font-family: "Lilita One", sans-serif; color: var(--pink); font-weight: 400; font-size: 1.15rem; font-variant-numeric: tabular-nums; }
+@media (max-width: 640px) { .extras { grid-template-columns: 1fr; } }
+
 .note { text-align: center; margin-top: 28px; color: var(--muted); font-size: .95rem; }
 
 /* Find us */
