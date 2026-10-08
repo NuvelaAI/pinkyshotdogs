@@ -169,6 +169,10 @@ h1, h2, h3 { font-family: "Lilita One", "Nunito", sans-serif; font-weight: 400; 
 .price-sm { font-family: "Lilita One", sans-serif; color: var(--pink); font-weight: 400; font-size: 1.15rem; font-variant-numeric: tabular-nums; }
 @media (max-width: 640px) { .extras { grid-template-columns: 1fr; } }
 
+.quote-note { margin: 28px auto 0; max-width: 640px; text-align: center; }
+.quote-note p { margin: 0 0 4px; font-size: 1.05rem; }
+.quote-note a { font-weight: 800; }
+
 .note { text-align: center; margin-top: 28px; color: var(--muted); font-size: .95rem; }
 
 /* Find us */
