@@ -86,7 +86,7 @@ form.addEventListener("submit", async (e) => {
     showThanks();
   } catch {
     status.classList.add("err");
-    status.textContent = `Your request didn't go through. Please try again, or call or text (631) 327-0050.`;
+    status.textContent = `Your request didn't go through. Please try again, or call or text (864) 631-6968.`;
   } finally {
     btn.disabled = false;
     btn.textContent = "Send Booking Request";
